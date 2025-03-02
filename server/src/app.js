@@ -2,11 +2,13 @@ const express = require("express");
 const cors = require("cors");
 const http = require("http");
 const socketIo = require("socket.io");
+const cookieParser = require("cookie-parser");
 const Message_Model = require("./db/models/message");
 require("dotenv").config();
 require("./db/connection");
 
 const app = express();
+
 // const server = http.createServer(app);
 // const io = socketIo(server, {
 //     cors: {
@@ -17,10 +19,12 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
+    origin: process.env.CLIENT_ORIGIN,
+    methods: ["GET", "POST", "DELETE", "PUT"],
+    credentials: true,
   })
 );
+app.use(cookieParser());
 app.use(express.json());
 app.use("/", require("./routes/userRoute"));
 
