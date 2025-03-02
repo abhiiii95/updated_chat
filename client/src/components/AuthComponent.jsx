@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../assets/style/authComponent.css";
+import { toast } from "react-toastify";
 
 export default function AuthComponent() {
   const [activeTab, setActiveTab] = useState("login");
@@ -76,7 +77,7 @@ function RegisterForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!username || !email || !password) {
-      setError("All fields are required.");
+      toast("All fields are required.");
       return;
     }
     setError("");
@@ -85,7 +86,7 @@ function RegisterForm() {
 
   return (
     <form className="auth-form" onSubmit={handleSubmit}>
-      {error && <p className="error-message">{error}</p>}
+      {/* {error && <p className="error-message">{error}</p>} */}
       <input 
         type="text" 
         placeholder="Username" 
