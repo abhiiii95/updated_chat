@@ -74,14 +74,21 @@ function RegisterForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const validate = ()=>{
+    if (!username || !email || !password) {
+        toast("All fields are required.");
+        return;
+      }
+      setError("");
+      alert("Registration Successful");
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!username || !email || !password) {
-      toast("All fields are required.");
-      return;
+    if(validate()){
+        
     }
-    setError("");
-    alert("Registration Successful");
+   
   };
 
   return (
