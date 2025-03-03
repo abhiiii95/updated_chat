@@ -35,7 +35,7 @@ export default function AuthComponent() {
 
 function LoginForm() {
   const navigate = useNavigate()
-  const {setUserInfo} = useAppStore() 
+  const {setUserInfo} = useAppStore(); 
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -88,7 +88,7 @@ function LoginForm() {
 
 function RegisterForm() {
   const navigate = useNavigate()
-
+  const {setUserInfo} = useAppStore();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -117,15 +117,7 @@ function RegisterForm() {
 
   return (
     <form className="auth-form" onSubmit={handleSubmit}>
-      {/* {error && <p className="error-message">{error}</p>} */}
-      {/* <input 
-        type="text" 
-        placeholder="Username" 
-        required 
-        className="auth-input" 
-        value={username} 
-        onChange={(e) => setUsername(e.target.value)}
-      /> */}
+
       <input 
         type="email" 
         placeholder="Email" 
