@@ -117,15 +117,7 @@ function RegisterForm() {
 
   return (
     <form className="auth-form" onSubmit={handleSubmit}>
-      {/* {error && <p className="error-message">{error}</p>} */}
-      {/* <input 
-        type="text" 
-        placeholder="Username" 
-        required 
-        className="auth-input" 
-        value={username} 
-        onChange={(e) => setUsername(e.target.value)}
-      /> */}
+
       <input 
         type="email" 
         placeholder="Email" 
