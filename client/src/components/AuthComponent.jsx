@@ -35,7 +35,7 @@ export default function AuthComponent() {
 
 function LoginForm() {
   const navigate = useNavigate()
-  const {setUserInfo} = useAppStore() 
+  const {setUserInfo} = useAppStore(); 
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -88,7 +88,7 @@ function LoginForm() {
 
 function RegisterForm() {
   const navigate = useNavigate()
-
+  const {setUserInfo} = useAppStore();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
