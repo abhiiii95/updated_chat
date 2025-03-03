@@ -1,6 +1,10 @@
 import { useState } from "react";
 import "../assets/style/authComponent.css";
 import { toast } from "react-toastify";
+import { apiClient } from "../lib/api-client";
+import { LOGIN_ROUTES, SIGN_UP_ROUTES } from "../utils/constant";
+import {useNavigate} from "react-router"
+import { useAppStore } from "../store";
 
 export default function AuthComponent() {
   const [activeTab, setActiveTab] = useState("login");
@@ -30,18 +34,32 @@ export default function AuthComponent() {
 }
 
 function LoginForm() {
+  const navigate = useNavigate()
+  const {setUserInfo} = useAppStore() 
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const loginValidate = () =>{
     if (!email || !password) {
-      setError("All fields are required.");
-      return;
+        setError("All fields are required.");
+        return;
+      }
+     return true
+  }
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+  if(loginValidate()){
+    const response = await apiClient.post(LOGIN_ROUTES,{email,password},{withCredentials:true})
+    if(response.data.user._id){
+        setUserInfo(response.data.user);
+        if(response.data.user.profileSetup)navigate("/chat");
+        else navigate("/profile")
     }
-    setError("");
-    alert("Login Successful");
+    console.log(response,"response")
+  }
   };
 
   return (
@@ -69,23 +87,29 @@ function LoginForm() {
 }
 
 function RegisterForm() {
-  const [username, setUsername] = useState("");
+  const navigate = useNavigate()
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const validate = ()=>{
-    if (!username || !email || !password) {
+    if (!email || !password) {
         toast("All fields are required.");
         return;
       }
-      setError("");
-      alert("Registration Successful");
+      return true
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     if(validate()){
+        const response = await apiClient.post(SIGN_UP_ROUTES,{email,password},{withCredentials:true})
+        if(response.status===201){
+        setUserInfo(response.data.user);
+
+            navigate("/profile")
+        }
         
     }
    
@@ -94,14 +118,14 @@ function RegisterForm() {
   return (
     <form className="auth-form" onSubmit={handleSubmit}>
       {/* {error && <p className="error-message">{error}</p>} */}
-      <input 
+      {/* <input 
         type="text" 
         placeholder="Username" 
         required 
         className="auth-input" 
         value={username} 
         onChange={(e) => setUsername(e.target.value)}
-      />
+      /> */}
       <input 
         type="email" 
         placeholder="Email" 

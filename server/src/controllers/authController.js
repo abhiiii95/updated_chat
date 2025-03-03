@@ -18,7 +18,7 @@ exports.Register = async (req, res) => {
   }
 
   try {
-    const newUser = await UserModel.create({ username, email, password });
+    const newUser = await UserModel.create({  email, password });
 
     const token = newUser.CreateToken();
     res.cookie("jwt", token, {
@@ -83,6 +83,7 @@ exports.Login = async (req, res) => {
     return res.status(200).json({
       status: true,
       message: "User login successful",
+      user
       // token
     });
   } catch (error) {
