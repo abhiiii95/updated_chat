@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const UserModel = require("../db/models/user.model");
 const maxAge = 3 * 24 * 60 * 60 * 1000; //3 days
+
 exports.Register = async (req, res) => {
   const { email, password } = req.body;
 
