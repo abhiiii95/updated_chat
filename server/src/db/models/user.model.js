@@ -69,9 +69,10 @@ UserSchema.methods.CreateToken = function () {
     userId: this._id,
     email: this.email,
   };
-  const createToken = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
+  const createToken = jwt.sign(payload, JWT_SECRET, { expiresIn: "3d" });
   return createToken;
 };
+
 
 const UserModel = mongoose.model("user", UserSchema);
 
