@@ -51,10 +51,8 @@ function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (loginValidate()) {
       const response = await apiClient.post(LOGIN_ROUTES, { email, password }, { withCredentials: true })
-
       if (response.data.user._id) {
         setUserInfo(response.data.user);
         if (response.data.user.profileSetup) navigate("/chat");
