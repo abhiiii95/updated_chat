@@ -1,11 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-const { Register, Login } = require("../controllers/authController");
-const { Avtar } = require("../controllers/userAvtar");
+const { Register, Login, userInfo } = require("../controllers/authController");
+const { Auth } = require("../middlewares/Auth");
+
 
 router.post("/register", Register);
 router.post("/login", Login);
-router.get("/avtar/:id", Avtar);
+router.get("/userInfo", Auth, userInfo)
+
 
 module.exports = router;

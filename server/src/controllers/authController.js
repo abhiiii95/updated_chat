@@ -1,6 +1,11 @@
 const bcrypt = require("bcrypt");
 const UserModel = require("../db/models/user.model");
 const maxAge = 3 * 24 * 60 * 60 * 1000; //3 days
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/server
 exports.Register = async (req, res) => {
   const { email, password } = req.body;
 
@@ -17,7 +22,7 @@ exports.Register = async (req, res) => {
   }
 
   try {
-    const newUser = await UserModel.create({  email, password });
+    const newUser = await UserModel.create({ email, password });
 
     const token = newUser.CreateToken();
     res.cookie("jwt", token, {
@@ -50,6 +55,7 @@ exports.Register = async (req, res) => {
     });
   }
 };
+
 
 exports.Login = async (req, res) => {
   try {
@@ -94,3 +100,36 @@ exports.Login = async (req, res) => {
     });
   }
 };
+
+
+exports.userInfo = async (req, res) => {
+
+  try {
+
+    const _id = req.user.userId
+
+    const user = await UserModel.findById({ _id });
+    console.log("user: ", user)
+    if (!user) {
+      return res.status(404).json({
+        status: false,
+        message: "User not found"
+      })
+    };
+
+    res.status(200).json({
+      status: true,
+      message: "User data fetched successfully",
+      user
+    })
+
+  } catch (error) {
+    console.log("Error in fetching user data", error)
+    res.status(500).json({
+      status: false,
+      message: "Internal server error",
+      error: error.message
+    })
+
+  }
+}
