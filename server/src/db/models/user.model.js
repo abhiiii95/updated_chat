@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt");
-const { JWT_SECRET } = process.env
+const { JWT_SECRET, MAX_TOKEN_AGE } = process.env
 
 const UserSchema = new mongoose.Schema(
   {
@@ -58,7 +58,7 @@ UserSchema.methods.CreateToken = function () {
     userId: this._id,
     email: this.email,
   };
-  const createToken = jwt.sign(payload, JWT_SECRET, { expiresIn: "3d" });
+  const createToken = jwt.sign(payload, JWT_SECRET, { expiresIn: `${MAX_TOKEN_AGE}d` });
   return createToken;
 };
 

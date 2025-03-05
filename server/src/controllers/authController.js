@@ -1,6 +1,6 @@
-const bcrypt = require("bcrypt");
+
 const UserModel = require("../db/models/user.model");
-const maxAge = 3 * 24 * 60 * 60 * 1000; //3 days
+const maxAge = (process.env.MAX_TOKEN_AGE) * 24 * 60 * 60 * 1000;
 
 
 exports.Register = async (req, res) => {
@@ -138,13 +138,17 @@ exports.completeUserProfile = async (req, res) => {
 
     const { firstName, lastName } = req.body;
     const _id = req.user.userId
-    console.log("completeUserProfile _id: ", _id, req.body)
+    const image = req?.file?.path
+    console.log("completeUserProfile _id: ", _id)
+    console.log("completeUserProfile Body: ", req.body)
+    console.log("completeUserProfile file: ", req?.file?.path)
     const userUpdate = await UserModel.findByIdAndUpdate(
       _id,
       {
         $set: {
           firstName,
           lastName,
+          image: image || '',
           profileSetup: true
         }
       },

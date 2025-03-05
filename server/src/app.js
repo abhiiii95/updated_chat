@@ -24,3 +24,12 @@ app.use("/", require("./routes/userRoute"));
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+let keywords = [
+  "Full Stack Developer | React | Node.js | REST APIs | MongoDB",
+  "Experienced API Developer | Ready to Join | Node.js | Scalable Backend Systems",
+  "API Developer | Node.js | MongoDB | 3 Years Experience | MERN Stack",
+  "Backend Developer | Node.js | Express.js | REST APIs | MongoDB | 3 Yrs Exp",
+  "Software Engineer (Backend) | Node.js | API Development | Express.js | MongoDB",
+  "MERN Stack Developer | Node.js | MongoDB | React.js | API Development"
+]
