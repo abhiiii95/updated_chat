@@ -24,6 +24,7 @@ const UserSchema = new mongoose.Schema(
     image: {
       type: String,
       required: false,
+      default: "",
     },
     color: {
       type: Number,
@@ -33,18 +34,6 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    //     isAvtarImageSet:{
-    //             type:Boolean,
-    //             default:false
-    //     },
-    //     avtarImage:{
-    //         type:String,
-    //         default:""
-    // }
-    // confirmPassword: {
-    //   type: String,
-    //   required: [false, "Please provide confirm Password"],
-    // },
   },
   { timestamps: true }
 );

@@ -2,10 +2,7 @@ const bcrypt = require("bcrypt");
 const UserModel = require("../db/models/user.model");
 const maxAge = 3 * 24 * 60 * 60 * 1000; //3 days
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/server
 exports.Register = async (req, res) => {
   const { email, password } = req.body;
 
@@ -107,8 +104,9 @@ exports.userInfo = async (req, res) => {
   try {
 
     const _id = req.user.userId
+    console.log("userIfo _id: ", _id)
 
-    const user = await UserModel.findById({ _id });
+    const user = await UserModel.findById(_id);
     console.log("user: ", user)
     if (!user) {
       return res.status(404).json({
@@ -131,5 +129,47 @@ exports.userInfo = async (req, res) => {
       error: error.message
     })
 
+  }
+}
+
+
+exports.completeUserProfile = async (req, res) => {
+  try {
+
+    const { firstName, lastName } = req.body;
+    const _id = req.user.userId
+    console.log("completeUserProfile _id: ", _id, req.body)
+    const userUpdate = await UserModel.findByIdAndUpdate(
+      _id,
+      {
+        $set: {
+          firstName,
+          lastName,
+          profileSetup: true
+        }
+      },
+      { new: true }
+    );
+
+    if (!userUpdate) {
+      return res.status(404).json({
+        status: false,
+        message: "User not found"
+      })
+    };
+
+    res.status(200).json({
+      status: true,
+      message: "User Setup complete successfully",
+      user: userUpdate
+    })
+
+  } catch (error) {
+    console.log("Error in completing user profile", error)
+    res.status(500).json({
+      status: false,
+      message: "Internal server error",
+      error: error.message
+    })
   }
 }

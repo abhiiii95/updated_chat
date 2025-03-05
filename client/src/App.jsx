@@ -29,6 +29,7 @@ function App() {
   const { userInfo, setUserInfo } = useAppStore();
   const [loading, setLoading] = useState(true);
 
+
   useEffect(() => {
     const getUserData = async () => {
       try {
@@ -36,7 +37,7 @@ function App() {
         const response = await apiClient.get(GET_USER_ROUTES, {
           withCredentials: true
         })
-        console.log("App.jsx,User Data", response.data)
+        console.log("App response User", response.data)
       } catch (error) {
         console.log("Error in fetching user data", error)
       }
