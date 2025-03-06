@@ -4,18 +4,20 @@ import { useNavigate } from 'react-router';
 
 
 const Chat = () => {
-  const {userInfo} = useAppStore();
+  const { userInfo } = useAppStore();
   const navigate = useNavigate();
-  useEffect(()=>{
-    if(!userInfo.profileSetup){
-      console.log("please profile steup");
+
+  console.log("Chat userInfo: ", userInfo)
+  useEffect(() => {
+    if (!userInfo.profileSetup) {
+      console.log("Please complete Your Profile Steup");
       navigate("/profile")
     }
-  },[userInfo,navigate])
+  }, [userInfo, navigate])
   return (
     <div>
       chat
-   
+
     </div>
   )
 }

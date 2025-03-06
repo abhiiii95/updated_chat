@@ -7,26 +7,53 @@ import Home from "./pages/home";
 import { ToastContainer } from 'react-toastify';
 import { useAppStore } from "./store";
 import { useEffect, useState } from "react";
-const PrivateRoute =({children})=>{
-  const {userInfo} = useAppStore();
+import { apiClient } from "./lib/api-client";
+import { GET_USER_ROUTES } from "./utils/constant";
+
+
+const PrivateRoute = ({ children }) => {
+  const { userInfo } = useAppStore();
   const isAuthenticated = !!userInfo;
-  return isAuthenticated ? children:<Navigate to="/auth" />
+  return isAuthenticated ? children : <Navigate to="/auth" />
 }
-const AuthRoute =({children})=>{
-  const {userInfo} = useAppStore();
+
+
+const AuthRoute = ({ children }) => {
+  const { userInfo } = useAppStore();
   const isAuthenticated = !!userInfo;
-  return isAuthenticated ? <Navigate to="/chat" />:children
+  return isAuthenticated ? <Navigate to="/chat" /> : children
 }
 
 function App() {
-  const {userInfo,setUserInfo} = useAppStore();
-  const [loading,setLoading]= useState(true);
-  useEffect(()=>{
-    // const getUserData = async ()=>{},
-    if(!userInfo){
+
+  const { userInfo, setUserInfo } = useAppStore();
+  const [loading, setLoading] = useState(true);
+
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+
+        const response = await apiClient.get(GET_USER_ROUTES, {
+          withCredentials: true
+        })
+        console.log("App response User", response.data)
+      } catch (error) {
+        console.log("Error in fetching user data", error)
+      }
+    };
+    if (!userInfo) {
       getUserData()
     }
-  },[])
+    else {
+      console.log("App userInfo: ", userInfo)
+      setLoading(false)
+    }
+  }, [userInfo, setUserInfo])
+
+  // if (loading) {
+  //   return <div>Loading...</div>
+  // }
 
   return (
     <>

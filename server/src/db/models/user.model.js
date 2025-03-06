@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt");
-const { JWT_SECRET } = process.env
+const { JWT_SECRET, MAX_TOKEN_AGE } = process.env
 
 const UserSchema = new mongoose.Schema(
   {
@@ -24,6 +24,7 @@ const UserSchema = new mongoose.Schema(
     image: {
       type: String,
       required: false,
+      default: "",
     },
     color: {
       type: Number,
@@ -33,18 +34,6 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    //     isAvtarImageSet:{
-    //             type:Boolean,
-    //             default:false
-    //     },
-    //     avtarImage:{
-    //         type:String,
-    //         default:""
-    // }
-    // confirmPassword: {
-    //   type: String,
-    //   required: [false, "Please provide confirm Password"],
-    // },
   },
   { timestamps: true }
 );
@@ -69,9 +58,10 @@ UserSchema.methods.CreateToken = function () {
     userId: this._id,
     email: this.email,
   };
-  const createToken = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
+  const createToken = jwt.sign(payload, JWT_SECRET, { expiresIn: `${MAX_TOKEN_AGE}d` });
   return createToken;
 };
+
 
 const UserModel = mongoose.model("user", UserSchema);
 

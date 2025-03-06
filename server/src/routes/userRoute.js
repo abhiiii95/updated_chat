@@ -1,11 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-const { Register, Login } = require("../controllers/authController");
-const { Avtar } = require("../controllers/userAvtar");
+const { Register, Login, userInfo, completeUserProfile } = require("../controllers/authController");
+const { Auth } = require("../middlewares/Auth");
+const { uploadProfileImage } = require("../middlewares/uploadProfileImage");
+
 
 router.post("/register", Register);
 router.post("/login", Login);
-router.get("/avtar/:id", Avtar);
+router.get("/userInfo", Auth, userInfo)
+router.post("/updateUserProfile", Auth, uploadProfileImage, completeUserProfile)
+
 
 module.exports = router;
