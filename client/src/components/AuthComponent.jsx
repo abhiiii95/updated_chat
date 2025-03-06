@@ -36,13 +36,8 @@ export default function AuthComponent() {
 }
 
 function LoginForm() {
-<<<<<<< HEAD
   const navigate = useNavigate();
   const { setUserInfo } = useAppStore();
-=======
-  const navigate = useNavigate()
-  const {setUserInfo} = useAppStore(); 
->>>>>>> 338f6a3ebdc9088a9abaec55ae598565c18d40f4
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -100,13 +95,8 @@ function LoginForm() {
 }
 
 function RegisterForm() {
-<<<<<<< HEAD
   const navigate = useNavigate();
-
-=======
-  const navigate = useNavigate()
-  const {setUserInfo} = useAppStore();
->>>>>>> 338f6a3ebdc9088a9abaec55ae598565c18d40f4
+  const { setUserInfo } = useAppStore();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -137,31 +127,12 @@ function RegisterForm() {
 
   return (
     <form className="auth-form" onSubmit={handleSubmit}>
-<<<<<<< HEAD
-      {/* {error && <p className="error-message">{error}</p>} */}
-      {/* <input 
-        type="text" 
-        placeholder="Username" 
-        required 
-        className="auth-input" 
-        value={username} 
-        onChange={(e) => setUsername(e.target.value)}
-      /> */}
       <input
         type="email"
         placeholder="Email"
         required
         className="auth-input"
         value={email}
-=======
-
-      <input 
-        type="email" 
-        placeholder="Email" 
-        required 
-        className="auth-input" 
-        value={email} 
->>>>>>> 338f6a3ebdc9088a9abaec55ae598565c18d40f4
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
