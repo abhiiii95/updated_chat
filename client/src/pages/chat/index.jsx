@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useAppStore } from '../../store'
 import { useNavigate } from 'react-router';
+import ChatPage from '../../components/ChatModule/ChatPage';
 
 
 const Chat = () => {
@@ -16,7 +17,7 @@ const Chat = () => {
   }, [userInfo, navigate])
   return (
     <div>
-      chat
+    <ChatPage />
 
     </div>
   )

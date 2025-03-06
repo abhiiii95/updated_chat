@@ -1,0 +1,79 @@
+/* ChatPage.css */
+.chat-page {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+  
+  .user-list {
+    width: 25%;
+    padding: 16px;
+    background-color: #f3f4f6;
+    height: 100vh;
+  }
+  
+  .user-list .title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  
+  .user-item {
+    padding: 8px;
+    border: none;
+    background: transparent;
+    /* background: white;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  }
+  
+  .chat-area {
+    width: 75%;
+    /* padding: 16px; */
+    background-color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
+  }
+  
+  .chat-area .title {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  .user-btn{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .chatHeader{
+    padding: 20px;
+    width: 100%;
+    border-bottom: 2px solid #f3f4f6;
+    display: flex;
+    justify-content: flex-end;
+    max-height: 80px;
+    
+  }
+  .ChatMessageArea{
+    flex: 1;
+  }
+  .chatInput{
+    padding: 20px;
+    background-color: aliceblue;
+    color: #333;
+    border: 2px solid #333;
+    border-radius: 5px;
+    width: 100%;
+  }
+  .ChatMessageBox{
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+  }
